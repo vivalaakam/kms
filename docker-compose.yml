@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: kms_app_db
+    image: postgres:alpine
+    restart: always
+    command: postgres
+    ports:
+      - 54322:5432
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=app_user
+      - POSTGRES_PASSWORD=app_password
+  vault:
+    container_name: kms_app_vault
+    image: hashicorp/vault
+    restart: always
+    ports:
+      - 8200:8200
+    environment:
+      - VAULT_DEV_ROOT_TOKEN_ID=root
